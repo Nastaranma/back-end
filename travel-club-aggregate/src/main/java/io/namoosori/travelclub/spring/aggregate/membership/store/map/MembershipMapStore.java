@@ -12,73 +12,80 @@ import java.util.stream.Collectors;
 
 @Repository
 public class MembershipMapStore implements MembershipStore {
-	//
-	private Map<String, Membership> membershipMap;
+    //
+    private Map<String, Membership> membershipMap;
 
-	public MembershipMapStore() {
-		//
-		this.membershipMap = new LinkedHashMap<>();
-	}
+    public MembershipMapStore() {
+        //
+        this.membershipMap = new LinkedHashMap<>();
+    }
 
-	@Override
-	public String create(Membership membership) {
-		//
-		membershipMap.put(membership.getId(), membership);
-		return membership.getId();
-	}
+    @Override
+    public String create(Membership membership) {
+        //
+        membershipMap.put(membership.getId(), membership);
+        return membership.getId();
+    }
 
-	@Override
-	public Membership retrieve(String membershipId) {
-		//
-		return membershipMap.get(membershipId);
-	}
+    @Override
+    public Membership retrieve(String membershipId) {
+        //
+        return membershipMap.get(membershipId);
+    }
 
-	@Override
-	public Membership retrieveByClubIdAndMemberId(String clubId, String memberId) {
-		//
-		Membership targetMembership = null;
+    @Override
+    public Membership retrieveByClubIdAndMemberId(String clubId, String memberId) {
+        //
+        Membership targetMembership = null;
 
-		for (Membership membership : membershipMap.values()) {
-			if (membership.getClubId().equals(clubId) && membership.getMemberId().equals(memberId)) {
-				targetMembership = membership;
-				break;
-			}
-		}
+        for (Membership membership : membershipMap.values()) {
+            if (membership.getClubId().equals(clubId) && membership.getMemberId().equals(memberId)) {
+                targetMembership = membership;
+                break;
+            }
+        }
 
-		return targetMembership;
-	}
+        return targetMembership;
+    }
 
-	@Override
-	public List<Membership> retrieveByClubId(String clubId) {
-		//
-		return membershipMap.values().stream()
-				.filter(membership -> membership.getClubId().equals(clubId))
-				.collect(Collectors.toList());
-	}
+    @Override
+    public List<Membership> retrieveByClubId(String clubId) {
+        //
+        return membershipMap.values().stream()
+                .filter(membership -> membership.getClubId().equals(clubId))
+                .collect(Collectors.toList());
+    }
 
-	@Override
-	public List<Membership> retrieveByMemberId(String memberId) {
-		//
-		return membershipMap.values().stream()
-				.filter(membership -> membership.getMemberId().equals(memberId))
-				.collect(Collectors.toList());
-	}
+    @Override
+    public List<Membership> retrieveByAllClubs() {
+        //
+        return membershipMap.values().stream()
+                .collect(Collectors.toList());
+    }
 
-	@Override
-	public void update(Membership membership) {
-		//
-		membershipMap.put(membership.getId(), membership);
-	}
+    @Override
+    public List<Membership> retrieveByMemberId(String memberId) {
+        //
+        return membershipMap.values().stream()
+                .filter(membership -> membership.getMemberId().equals(memberId))
+                .collect(Collectors.toList());
+    }
 
-	@Override
-	public void delete(String membershipId) {
-		//
-		membershipMap.remove(membershipId);
-	}
+    @Override
+    public void update(Membership membership) {
+        //
+        membershipMap.put(membership.getId(), membership);
+    }
 
-	@Override
-	public boolean exists(String membershipId) {
-		//
-		return Optional.ofNullable(retrieve(membershipId)).isPresent();
-	}
+    @Override
+    public void delete(String membershipId) {
+        //
+        membershipMap.remove(membershipId);
+    }
+
+    @Override
+    public boolean exists(String membershipId) {
+        //
+        return Optional.ofNullable(retrieve(membershipId)).isPresent();
+    }
 }

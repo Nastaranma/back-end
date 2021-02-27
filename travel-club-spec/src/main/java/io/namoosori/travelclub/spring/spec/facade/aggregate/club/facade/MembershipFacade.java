@@ -12,6 +12,7 @@ public interface MembershipFacade {
     Membership findMembership(String membershipId);
     Membership findMembershipByClubIdAndMemberId(String clubId, String memberId);
     List<Membership> findAllMembershipsOfClub(String clubId);
+    List<Membership> findAllMembershipsOfAllClubs();
     List<Membership> findAllMembershipsOfMember(String memberId);
     void modifyMembership(String membershipId, NameValueList nameValueList);
     void removeMembership(String membershipId);

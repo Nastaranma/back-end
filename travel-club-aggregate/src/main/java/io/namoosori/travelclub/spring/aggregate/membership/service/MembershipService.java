@@ -13,6 +13,7 @@ public interface MembershipService {
     Membership findMembershipByClubIdAndMemberId(String clubId, String memberId);
     Membership findMembershipByClubIdAndMemberEmail(String clubId, String memberEmail);
     List<Membership> findAllMembershipsOfClub(String clubId);
+    List<Membership> findAllMembershipsOfAllClubs();
     List<Membership> findAllMembershipsOfMember(String memberId);
     void modifyMembership(String membershipId, NameValueList nameValueList);
     void removeMembership(String membershipId);

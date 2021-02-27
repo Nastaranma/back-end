@@ -49,6 +49,14 @@ public class MembershipResource implements MembershipFacade {
         return membershipService.findAllMembershipsOfClub(clubId);
     }
 
+    @GetMapping("/allClub")
+    @Override
+    public List<Membership> findAllMembershipsOfAllClubs() {
+        //
+        return membershipService.findAllMembershipsOfAllClubs();
+    }
+
+
     @GetMapping("/member")
     @Override
     public List<Membership> findAllMembershipsOfMember(@RequestParam String memberId) {

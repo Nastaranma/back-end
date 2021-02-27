@@ -99,6 +99,13 @@ public class MembershipServiceLogic implements MembershipService {
     }
 
     @Override
+    public List<Membership> findAllMembershipsOfAllClubs() {
+        //
+        return membershipStore.retrieveByAllClubs();
+    }
+
+
+    @Override
     public List<Membership> findAllMembershipsOfMember(String memberId) {
         //
         return membershipStore.retrieveByMemberId(memberId);
